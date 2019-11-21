@@ -391,16 +391,16 @@ public class GpsLoggingService extends Service  {
 
 
 
-        try {
+/*        try {
             startForeground(NOTIFICATION_ID, getNotification());
         } catch (Exception ex) {
             LOG.error("Could not start GPSLoggingService in foreground. ", ex);
-        }
+        }*/
 
         session.setStarted(true);
 
         resetAutoSendTimersIfNecessary();
-        showNotification();
+        //showNotification();
         setupAutoSendTimers();
         resetCurrentFileName(true);
         notifyClientsStarted(true);
@@ -479,6 +479,7 @@ public class GpsLoggingService extends Service  {
     /**
      * Shows a notification icon in the status bar for GPS Logger
      */
+/*
     private Notification getNotification() {
 
         Intent stopLoggingIntent = new Intent(this, GpsLoggingService.class);
@@ -564,12 +565,13 @@ public class GpsLoggingService extends Service  {
         //notificationManager.notify(NOTIFICATION_ID, nfc.build());
         return nfc.build();
     }
+*/
 
-    private void showNotification(){
+/*    private void showNotification(){
         Notification notif = getNotification();
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         notificationManager.notify(NOTIFICATION_ID, notif);
-    }
+    }*/
 
     @SuppressWarnings("ResourceType")
     private void startPassiveManager() {
@@ -885,7 +887,7 @@ public class GpsLoggingService extends Service  {
         session.setFirstRetryTimeStamp(0);
         session.setCurrentLocationInfo(loc);
         setDistanceTraveled(loc);
-        showNotification();
+        //showNotification();
 
         if(isPassiveLocation){
             LOG.debug("Logging passive location to file");

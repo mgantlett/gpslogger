@@ -84,10 +84,10 @@ public class GpsMainActivity extends AppCompatActivity
 
     private static boolean userInvokedUpload;
     private static Intent serviceIntent;
-    private ActionBarDrawerToggle drawerToggle;
+    //private ActionBarDrawerToggle drawerToggle;
     private static final Logger LOG = Logs.of(GpsMainActivity.class);
 
-    Drawer materialDrawer;
+    //Drawer materialDrawer;
     AccountHeader drawerHeader;
     private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
     private Session session = Session.getInstance();
@@ -100,12 +100,12 @@ public class GpsMainActivity extends AppCompatActivity
         loadVersionSpecificProperties();
         Systems.setLocale(preferenceHelper.getUserSpecifiedLocale(), getBaseContext(),getResources());
 
-        setContentView(R.layout.activity_gps_main);
+        //setContentView(R.layout.activity_gps_main);
 
-        setUpToolbar();
-        setUpNavigationDrawer(savedInstanceState);
+        //setUpToolbar();
+        //setUpNavigationDrawer(savedInstanceState);
 
-        loadDefaultFragmentView();
+        //loadDefaultFragmentView();
         startAndBindService();
         registerEventBus();
 
@@ -129,7 +129,7 @@ public class GpsMainActivity extends AppCompatActivity
     }
 
 
-    @Override
+/*    @Override
     public void onSaveInstanceState(Bundle outState) {
 
         //Save the drawer's selected values to bundle
@@ -138,7 +138,7 @@ public class GpsMainActivity extends AppCompatActivity
         outState = drawerHeader.saveInstanceState(outState);
 
         super.onSaveInstanceState(outState);
-    }
+    }*/
 
     private void registerEventBus() {
         EventBus.getDefault().register(this);
@@ -166,11 +166,11 @@ public class GpsMainActivity extends AppCompatActivity
         startAndBindService();
 
         if (session.hasDescription()) {
-            setAnnotationReady();
+            //setAnnotationReady();
         }
 
-        populateProfilesList();
-        enableDisableMenuItems();
+        //populateProfilesList();
+        //enableDisableMenuItems();
 
 
     }
@@ -196,6 +196,7 @@ public class GpsMainActivity extends AppCompatActivity
 
     }
 
+/*
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -216,11 +217,12 @@ public class GpsMainActivity extends AppCompatActivity
 
         return super.onKeyUp(keyCode, event);
     }
+*/
 
     /**
      * Handles the hardware back-button press
      */
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
+/*    public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && session.isBoundToService()) {
             stopAndUnbindServiceIfRequired();
         }
@@ -237,7 +239,7 @@ public class GpsMainActivity extends AppCompatActivity
         }
 
         return super.onKeyDown(keyCode, event);
-    }
+    }*/
 
     private void removeFragmentsAndActionBar(){
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -340,7 +342,7 @@ public class GpsMainActivity extends AppCompatActivity
 
     }
 
-    public void setUpNavigationDrawer(Bundle savedInstanceState) {
+/*    public void setUpNavigationDrawer(Bundle savedInstanceState) {
 
         final DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -550,7 +552,7 @@ public class GpsMainActivity extends AppCompatActivity
             }
         });
 
-    }
+    }*/
 
     private void refreshProfileIcon(String profileName){
 
@@ -566,6 +568,7 @@ public class GpsMainActivity extends AppCompatActivity
         imgLetter.setImageDrawable(drawLetter);
     }
 
+/*
     private void populateProfilesList() {
 
         LOG.debug("Current profile:" + preferenceHelper.getCurrentProfileName());
@@ -638,8 +641,9 @@ public class GpsMainActivity extends AppCompatActivity
 
 
     }
+*/
 
-    public void toggleDrawer(){
+/*    public void toggleDrawer(){
         if(materialDrawer.isDrawerOpen()){
             materialDrawer.closeDrawer();
 
@@ -647,7 +651,7 @@ public class GpsMainActivity extends AppCompatActivity
         else {
             materialDrawer.openDrawer();
         }
-    }
+    }*/
 
     private int getUserSelectedNavigationItem(){
         return preferenceHelper.getUserSelectedNavigationItem();
@@ -696,7 +700,7 @@ public class GpsMainActivity extends AppCompatActivity
     }
 
 
-    @Override
+/*    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         Toolbar toolbarBottom = (Toolbar) findViewById(R.id.toolbarBottom);
@@ -709,7 +713,7 @@ public class GpsMainActivity extends AppCompatActivity
 
         enableDisableMenuItems();
         return true;
-    }
+    }*/
 
     public void setupEvenlyDistributedToolbar(){
         //http://stackoverflow.com/questions/26489079/evenly-spaced-menu-items-on-toolbar
@@ -758,6 +762,7 @@ public class GpsMainActivity extends AppCompatActivity
         }
     }
 
+/*
     private void enableDisableMenuItems() {
 
         onWaitingForLocation(session.isWaitingForLocation());
@@ -796,6 +801,8 @@ public class GpsMainActivity extends AppCompatActivity
 
         }
     }
+*/
+
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
@@ -811,7 +818,7 @@ public class GpsMainActivity extends AppCompatActivity
                 annotate();
                 return true;
             case R.id.mnuOnePoint:
-                logSinglePoint();
+                //logSinglePoint();
                 return true;
             case R.id.mnuShare:
                 share();
@@ -848,6 +855,7 @@ public class GpsMainActivity extends AppCompatActivity
     }
 
 
+
     private void forceAutoSendNow() {
         LOG.debug("User forced an auto send");
 
@@ -860,10 +868,10 @@ public class GpsMainActivity extends AppCompatActivity
         }
     }
 
-    private void logSinglePoint() {
+/*    private void logSinglePoint() {
         EventBus.getDefault().post(new CommandEvents.LogOnce());
         enableDisableMenuItems();
-    }
+    }*/
 
     /**
      * Annotates GPX and KML files, TXT files are ignored.
@@ -1180,7 +1188,7 @@ public class GpsMainActivity extends AppCompatActivity
         bulb.setImageResource(started ? R.drawable.circle_green : R.drawable.circle_none);
     }
 
-    public void setAnnotationReady() {
+/*    public void setAnnotationReady() {
         session.setAnnotationMarked(true);
         enableDisableMenuItems();
     }
@@ -1188,12 +1196,12 @@ public class GpsMainActivity extends AppCompatActivity
     public void setAnnotationDone() {
         session.setAnnotationMarked(false);
         enableDisableMenuItems();
-    }
+    }*/
 
-    public void onWaitingForLocation(boolean inProgress) {
+/*    public void onWaitingForLocation(boolean inProgress) {
         ProgressBar fixBar = (ProgressBar) findViewById(R.id.progressBarGpsFix);
         fixBar.setVisibility(inProgress ? View.VISIBLE : View.INVISIBLE);
-    }
+    }*/
 
 
     @EventBusHook
@@ -1325,12 +1333,12 @@ public class GpsMainActivity extends AppCompatActivity
         }
     }
 
-    @EventBusHook
+/*    @EventBusHook
     public void onEventMainThread(ServiceEvents.WaitingForLocation waitingForLocation){
         onWaitingForLocation(waitingForLocation.waiting);
-    }
+    }*/
 
-    @EventBusHook
+/*    @EventBusHook
     public void onEventMainThread(ServiceEvents.AnnotationStatus annotationStatus){
         if(annotationStatus.annotationWritten){
             setAnnotationDone();
@@ -1338,14 +1346,14 @@ public class GpsMainActivity extends AppCompatActivity
         else {
             setAnnotationReady();
         }
-    }
+    }*/
 
-    @EventBusHook
+/*    @EventBusHook
     public void onEventMainThread(ServiceEvents.LoggingStatus loggingStatus){
             enableDisableMenuItems();
-    }
+    }*/
 
-    @EventBusHook
+/*    @EventBusHook
     public void onEventMainThread(ProfileEvents.CreateNewProfile createProfileEvent){
 
         LOG.debug("Creating profile: " + createProfileEvent.newProfileName);
@@ -1360,13 +1368,13 @@ public class GpsMainActivity extends AppCompatActivity
             LOG.error("Could not create properties file for new profile ", e);
         }
 
-    }
+    }*/
 
-    @EventBusHook
+/*    @EventBusHook
     public void onEventMainThread(ProfileEvents.PopulateProfiles populateProfileEvent){
         populateProfilesList();
         Dialogs.hideProgress();
-    }
+    }*/
 
     @EventBusHook
     public void onEventBackgroundThread(ProfileEvents.DownloadProfile downloadProfileEvent){
@@ -1390,14 +1398,14 @@ public class GpsMainActivity extends AppCompatActivity
 
     }
 
-    @EventBusHook
+    /*@EventBusHook
     public void onEventMainThread(ProfileEvents.DeleteProfile deleteProfileEvent){
         LOG.debug("Deleting profile: " + deleteProfileEvent.profileName);
         File f = new File(Files.storageFolder(GpsMainActivity.this), deleteProfileEvent.profileName+".properties");
         f.delete();
 
         populateProfilesList();
-    }
+    }*/
 
     @EventBusHook
     public void onEventMainThread(ProfileEvents.SaveProfile saveProfileEvent){
